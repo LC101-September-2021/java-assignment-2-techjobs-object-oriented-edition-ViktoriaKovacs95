@@ -1,17 +1,14 @@
 package org.launchcode.techjobs.oo.test;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 import org.launchcode.techjobs.oo.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Arrays;
+
 
 import static org.junit.Assert.assertEquals;
 
-import static org.junit.Assert.assertTrue;
+
 
 import static org.junit.Assert.*;
 
@@ -21,12 +18,6 @@ import static org.junit.Assert.*;
  */
 @RunWith(JUnit4.class)
 public class JobTest {
-//    @Before
-//    public void createJobObjects() {
-//
-//        Job emptyJob1 = new Job();
-//        Job emptyJob2 = new Job();
-//    }
 
     @Test
 
@@ -44,15 +35,22 @@ public class JobTest {
     public void testJobConstructorSetsAllFields() {
         Job testJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
-        assertSame("Product tester", testJob.getName());
+        assertTrue(testJob.getName() instanceof String);
 
-        assertSame("ACME", testJob.getEmployer().getValue());
+        assertTrue(testJob.getEmployer() instanceof Employer);
 
-        assertSame("Desert", testJob.getLocation().getValue());
+        assertTrue(testJob.getLocation() instanceof Location);
 
-        assertSame("Quality control", testJob.getPositionType().getValue());
+        assertTrue(testJob.getPositionType() instanceof PositionType);
 
-        assertSame("Persistence", testJob.getCoreCompetency().getValue());
+        assertTrue(testJob.getCoreCompetency() instanceof CoreCompetency);
+
+        assertEquals("Product Tester" , testJob.getName());
+        assertEquals("ACME" , testJob.getEmployer().getValue());
+        assertEquals("Desert" , testJob.getLocation().getValue());
+        assertEquals("Quality control" , testJob.getPositionType().getValue());
+        assertEquals("Persistence" , testJob.getCoreCompetency().getValue());
+
     }
 
 
@@ -68,40 +66,31 @@ public class JobTest {
 
     @Test
     public void testToStringNewLines() {
-        Job testJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));;
-        int lastIndex = (testJob.toString().length() - 1);
+        Job testJob4 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        ;
+        int lastIndex = (testJob4.toString().length() - 1);
 //
-//        assertEquals(testJob.toString().charAt(0) == '\n');
-//        assertTrue(testJob.toString().charAt(lastIndex) == '\n');
+       assertEquals( '\n',testJob4.toString().charAt(0));
+       assertEquals( '\n', testJob4.toString().charAt(lastIndex));
     }
 
     @Test
     public void testToStringPrintLabels() {
         Job testJob5 = new Job("Product tester", new Employer(""), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency(""));
-        assertEquals("\nID: " + testJob5.getId() + "\nName: Product tester\nEmployer: Data not available\nLocation: Desert\nPosition Type: Quality control\nCore Competency: Data not available\n" , testJob5.toString());
-
+         assertEquals("\nID: " + testJob5.getId() + "\nName: Product tester\nEmployer: \nLocation: Desert\nPosition Type: Quality control\nCore Competency" , testJob5.toString());
 
     }
-
     @Test
-    public void testToStringDataUnavailable() {
-        Job testJob = new Job();
-
-        String[] lines = testJob.toString().trim().split("\n");
-
-        System.out.println(testJob.toString());
-
-
-        List<String> list = new ArrayList<String>(Arrays.asList(lines));
-        list.remove(0);
-        lines = list.toArray(new String[0]);
-
-        String unavailable = "Data not available";
-
-        for (String line : lines) {
-            assertTrue(line.endsWith(unavailable));
+    public void testToString_DataNotAvailable() {
+        Job testJob6 = new Job("  ", new Employer(" "), new Location(" "), new PositionType(" "), new CoreCompetency(" "));
+            assertEquals("Data Not Available", testJob6.toString());
         }
     }
-}
+
+
+
+
+
+
 
 
