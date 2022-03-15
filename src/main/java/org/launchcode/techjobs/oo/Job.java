@@ -23,7 +23,11 @@ public class Job {
         nextId++;
     }
 
+
+
+
     public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
+        this();
         this.name = name;
         this.employer = employer;
         this.location = location;
@@ -76,7 +80,7 @@ public class Job {
             coreCompetencyValue = "Data not available";
         }
 
-        return "\nID: " + this.id + "\nName: " + nameValue + "\nEmployer: "
+        return "\nID: " + id + "\nName: " + nameValue + "\nEmployer: "
                 + employerValue + "\nLocation: " + locationValue
                 + "\nPosition Type: " + positionTypeValue
                 + "\nCore Competency: " + coreCompetencyValue + "\n";
